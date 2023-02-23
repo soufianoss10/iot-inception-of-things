@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
      # Get the node token from the server
     #  k3s_token=$(vagrant ssh sbenzarS sudo cat /var/lib/rancher/k3s/server/token)
      sudo cat /var/lib/rancher/k3s/server/token > /home/vagrant/token
-     # get the node token from the server
+    #  get the node token from the server
       # NODE_TOKEN=$(sudo cat /var/lib/rancher/k3s/server/token)
      SHELL
 
@@ -35,7 +35,9 @@ Vagrant.configure("2") do |config|
       vb.cpus = 1
     end
     sbenzarSW.vm.provision "shell", inline: <<-SHELL
+    curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh
     curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$(cat /vagrant/token) INSTALL_K3S_EXEC="--flannel-iface eth1" sh -s -
+
     SHELL
 
   end
