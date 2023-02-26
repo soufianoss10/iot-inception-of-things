@@ -24,8 +24,7 @@ spec:
             name: app2-service
             port:
               name: http
-  - host: ""
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
